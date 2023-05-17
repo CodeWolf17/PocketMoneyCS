@@ -1,0 +1,120 @@
+<?php
+// Read the variables sent via POST from our API
+$sessionId   = $_POST["sessionId"];
+$serviceCode = $_POST["serviceCode"];
+$phoneNumber = $_POST["phoneNumber"];
+$text        = $_POST["text"];
+
+if ($text == "") {
+    // This is the first request. Note how we start the response with CON
+    $response  = "CON Welcome to M-PESA \n";
+    $response .= "1. Lipa na M-PESA \n";
+    $response .= "2. Send Money (Tuma Pesa) \n";
+    $response .= "3. Withdraw Cash (Toa Pesa) \n";
+    $response .= "4. Buy Airtime (Nunua Airtime) \n";
+    $response .= "5. M-PESA Services (Huduma za M-PESA) \n";
+    $response .= "6. My Account (Nifungulie Akaunti) \n";
+    $response .= "7. Information (Taarifa)";
+
+} else if ($text == "1") {
+    // Business logic for Lipa na M-PESA
+    $response = "CON Enter business number \n";
+
+} else if ($text == "2") {
+    // Business logic for Send Money (Tuma Pesa)
+    $response = "CON Enter recipient phone number \n";
+
+} else if ($text == "3") {
+    // Business logic for Withdraw Cash (Toa Pesa)
+    $response = "CON Enter agent number \n";
+
+} else if ($text == "4") {
+    // Business logic for Buy Airtime (Nunua Airtime)
+    $response = "CON Enter amount \n";
+
+} else if ($text == "5") {
+    // Business logic for M-PESA Services (Huduma za M-PESA)
+    $response = "CON Select service \n";
+    $response .= "1. Pay Bill \n";
+    $response .= "2. Buy Goods and Services \n";
+    $response .= "3. Pocket Money";
+
+} else if ($text == "6") {
+    // Business logic for My Account (Nifungulie Akaunti)
+    $response = "CON Choose account information you want to view \n";
+    $response .= "1. Account number \n";
+
+} else if ($text == "7") {
+    // Business logic for Information (Taarifa)
+    $response = "END Thank you for using M-PESA!";
+
+} else if ($text == "5*3") {
+    // Business logic for Pocket Money
+    $response = "CON Select option \n";
+    $response .= "1. Create Account \n";
+    $response .= "2. Deposit from MPESA \n";
+    $response .= "3. Withdraw to MPESA \n";
+    $response .= "4. Create Plan \n";
+    $response .= "5. Transaction History";
+
+} else if ($text == "5*3*1") {
+    // Business logic for Create Account
+    $response = "END Your pocket money account has been created!";
+
+} else if ($text == "5*3*2") {
+    // Business logic for Deposit from MPESA
+    $response = "END Enter amount to deposit";
+
+} else if ($text == "5*3*3") {
+    // Business logic for Withdraw to MPESA
+    $response = "END Enter amount to withdraw";
+
+} else if ($text == "5*3*4") {
+    // Business logic for Create Plan
+    $response =  "END Choose your favoured plan";
+
+
+} else if ($text == "5*3*5") {
+    // Business logic for first level response
+    $response = "CON Choose the sub-service you want to access \n";
+    $response .= "1. Create Account \n";
+    $response .= "2. Deposit from MPESA \n";
+    $response .= "3. Withdraw To MPESA \n";
+    $response .= "4. Create Plan \n";
+    $response .= "5. PM Account Balance";
+    $response .= "6. Transactions History";
+}
+
+// Second level response
+else if ($text == "5*3*5*1") {
+    // Business logic for second level response
+    $response = "END Your account has been created successfully!";
+} else if ($text == "5*3*5*2") {
+    // Business logic for second level response
+    $response = "CON Enter the amount you want to deposit";
+} else if (strpos($text, "5*3*5*2*") !== false) {
+    // Business logic for second level response
+    $response = "END Your deposit of KES ".substr($text, 6)." has been successful!";
+} else if ($text == "5*3*3") {
+    // Business logic for second level response
+    $response = "CON Enter the amount you want to withdraw";
+} else if (strpos($text, "5*3*5*3*") !== false) {
+    // Business logic for second level response
+    $response = "END Your withdrawal of KES ".substr($text, 6)." has been successful!";
+} else if ($text == "5*3*5*4") {
+    // Business logic for second level response
+    $response = "CON Enter the name of the plan you want to create";
+} else if (strpos($text, "5*3*5*4*") !== false) {
+    // Business logic for second level response
+    $response = "END Plan '".substr($text, 8)."' has been created successfully!";
+} else if ($text == "5*3*5*5") {
+    // Business logic for second level response
+    $response = "END Your Balance Is";
+} else if ($text == "5*3*5*6") {
+    // Business logic for second level response
+    $response = "END Here are your transactions...";
+}
+
+// Echo the response back to the API
+header('Content-type: text/plain');
+echo $response;

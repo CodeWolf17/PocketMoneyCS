@@ -1,0 +1,305 @@
+Pocket Money Control System (PMCS) contains the following actors (Customer, Administrator and MPESA)
+
+1. The first actor Customer has the following information.
+(PhoneNumber as the primary key, FirstName, MiddleName, LastName, email, pin, fixed balance, available balance, profilepicture)
+This actor performs the following activities. 
+(Register account, Login, Deposit Funds, Withdraw Funds, Check transaction history, Transfer Funds to other accounts, Set fixed deposits, request emergency withdrawals from fixed deposit, checking balance)
+
+2. The Second actor Administrator has the following informations.
+(Id as the primary key, firstname, lastname, username, password, profilepicture)
+This actor performs the following activities.
+(Register customer, Edit customer infromation, delete customer, check total balance, check all transactions history,transfer funds between customers accounts, write announcemens, maintain site information)
+
+3.  The Third actor is MPESA Mobile Wallet(Extrenal wallet) has the following informations.
+(PhoneNumber as the primary key, balance, pin)
+This actor performs the following activities.
+(Deposit funds into the PMCS, Receive funds from the PMCS)
+
+
+The following is the flow of the system on customer's side
+1. Customer registers a new account
+2. Customer regisration information are store in the PMCS database
+3. Customer Logs In into the PMCS customer side
+4. Information are checked and if valid customer is loged into the PMCS if invalid user cant login
+5. Customer Deposits funds into PMCS and details are stored in the database
+6. Customer Withdraw funds from PMCS and details are stored in the database
+7. Customer Checks Account balance
+7. Customer Checks Transaction history
+8. Customer Logs Out.
+
+The following is the flow of the system on Administrator's side
+1. Admin Logs In into the PMCS admin side
+2. Information are checked and if valid admin is loged into the PMCS if invalid user cant login
+3. Admin creates new customers accounts and details are stored in the database
+4. Admin edits customer's account information and details are stored in the database
+5. Admin deletes customer's account and details are stored in the database
+6. Admin Checks Total PMCS Balance
+7. Admin Checks Transaction history
+8. Admin writes announcements
+9. Admin maintains site information
+10. Admin Logs Out.
+
+
+The following is the flow of the system on MPESA side
+1. Customer dials USSD code and transfer money from MPESA to PMCS account
+2. Customer dials USSD code and transfer money from PMCS to MPESA account.
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////    USE CASE    ////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+1...USE CASE
+The use case diagram for the Pocket Money Control System (PMCS) would have three main actors: Customer, Administrator, and MPESA Mobile Wallet.
+
+The Customer actor would have the following use cases:
+
+Register account
+Login
+Deposit Funds
+Withdraw Funds
+Check transaction history
+Transfer Funds to other accounts
+Set fixed deposits
+Request emergency withdrawals from fixed deposit
+Checking balance
+
+
+The Administrator actor would have the following use cases:
+
+Register customer
+Edit customer information
+Delete customer
+Check total balance
+Check all transaction history
+Transfer funds between customers accounts
+Write announcements
+Maintain site information
+
+
+The MPESA Mobile Wallet actor would have the following use cases:
+
+Deposit funds into the PMCS
+Receive funds from the PMCS
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////   ERD   ////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+The ERD diagram could be designed with three main entities: Customer, Administrator, and MPESA Mobile Wallet. 
+
+The Customer entity would have attributes such as PhoneNumber (primary key), FirstName, MiddleName, LastName, email, pin, fixed balance, available balance, and profile picture. The Customer entity would also have relationships with other entities such as the MPESA Mobile Wallet entity (through Deposit and Receive Funds relationships) and other Customer entities (through Transfer Funds relationship). 
+
+The Administrator entity would have attributes such as Id (primary key), FirstName, LastName, username, password, and profile picture. The Administrator entity would have relationships with the Customer entity (through Register, Edit, and Delete customer relationships), and other Administrator entities (through Transfer Funds relationship).
+
+The MPESA Mobile Wallet entity would have attributes such as PhoneNumber (primary key), balance, and pin. The MPESA Mobile Wallet entity would have relationships with the Customer entity (through Deposit and Receive Funds relationships).
+
+The ERD diagram would visually show these relationships and attributes in a clear and concise manner, allowing for easy understanding of the system's data model.
+
+
+
+
+
+
++-------------+     1      M      +-----------------------+ 
+|   Customer  |------------------|  MPESA Mobile Wallet   |
++-------------+    Deposit / Receive   +-----------------------+
+| PhoneNumber |<-----------------| PhoneNumber (PK)       |
+|  FirstName  |                   | balance               |
+| MiddleName  |                   | pin                   |
+|  LastName   |                   +-----------------------+
+|    email    |
+|     pin     |
+|fixed balance|
+|available bal|
+|profilepict |
++-------------+
+
+     | 1
+Register/|  \Check
+ Edit/  |   \Balance, Transaction
+Delete  |   /History, Transfer
+     1  | M
++------------+    1     M    +---------------+
+| Administrator |-------------|   Customer    |
++------------+     |   Transfer  | +-----------+
+|     Id     |-----------------| PhoneNumber(PK) |
+| FirstName  |                 |   FirstName |
+|  LastName  |                 |  MiddleName |
+|  username  |                 |   LastName |
+|  password  |                 |    email  |
+|profilepict |                 |     pin   |
++------------+                 |fixed balance|
+                                |available bal|
+                                |profilepict |
+                                +-----------+
+
+
+
+
+- One-to-many (1:M) relationships between Customer and Administrator (via Register, Edit, and Delete customer).
+- One-to-many (1:M) relationships between Administrator and Customer (via Transfer Funds).
+- One-to-one (1:1) relationship between MPESA Mobile Wallet and PhoneNumber (as the primary key).
+- One-to-one (1:1) relationship between Customer and PhoneNumber (as the primary key).
+
+Note that the Transfer Funds relationship between Administrator and Customer can also be a many-to-many (M:M) relationship, depending on the specific business rules of the Pocket Money Control System. If multiple administrators are allowed to transfer funds to multiple customers, then the relationship would be M:M. However, if only one administrator is allowed to transfer funds to one customer, then the relationship would be 1:1.
+
+It's important to note that the specific relationships between entities may vary depending on the business rules and requirements of the system. The ERD diagram should accurately represent the relationships and constraints of the data model, in order to ensure that the system functions as intended.
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////    DFD LEV0    ////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+I apologize, but as an AI language model, I cannot create a diagram for you. However, I can guide you on how to create the DFD Level 0 diagram yourself.
+
+To create the DFD Level 0 diagram, follow these steps:
+
+1. Identify the main actors and the system components involved in the process. In this case, the actors are Customer, Administrator, and MPESA Mobile Wallet, and the system components are Customer Management, Account Management, and Transaction Management.
+
+2. Draw a rectangular box in the center of the page and label it as "PMCS System."
+
+3. Draw three circles around the central box, one for each main process. Label them as "Customer Management," "Account Management," and "Transaction Management."
+
+4. Draw arrows between the main processes and the central box to represent data flows.
+
+5. Draw arrows between the main processes and the relevant actors to represent interactions.
+
+6. Add any external entities, such as the MPESA Mobile Wallet, to the diagram.
+
+7. Label the arrows to indicate the type of data flow.
+
+8. Add any necessary data stores or other supporting components to the diagram.
+
+9. Review and refine the diagram to ensure that it is clear and accurate.
+
+I hope this helps you create your DFD Level 0 diagram.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+I'm sorry, as an AI language model, I am not able to create visual content or sketches. However, I can describe a high-level view of a DFD Level 0 based on the information provided.
+
+DFD Level 0 represents the top-level view of the PMCS system, which consists of three main actors: Customer, Administrator, and MPESA Mobile Wallet. The DFD Level 0 shows the interactions between these actors and the system. 
+
+At this level, the PMCS system has three major processes: Customer Management, Account Management, and Transaction Management. 
+
+- Customer Management process: This process is responsible for managing the customer accounts. It includes the activities of registering, editing, and deleting customer accounts. The administrator actor interacts with this process to create or modify customer accounts.
+
+- Account Management process: This process manages the PMCS accounts of customers. It includes activities such as depositing funds, withdrawing funds, setting up fixed deposits, requesting emergency withdrawals, transferring funds between accounts, and checking balance. The customer actor interacts with this process to perform these activities.
+
+- Transaction Management process: This process is responsible for tracking all transactions in the system, including deposits, withdrawals, and transfers. The administrator actor interacts with this process to view the transaction history of all customer accounts.
+
+The MPESA Mobile Wallet actor interacts with the PMCS system to deposit funds into or receive funds from the system. This interaction is represented by a data flow between the MPESA Mobile Wallet and the Account Management process.
+
+Overall, the DFD Level 0 of the PMCS system provides a high-level view of the system's components and their interactions. It lays the foundation for more detailed DFD diagrams that can help in understanding the PMCS system's functionalities and processes.
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////    DFD LEV1    ////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+Sure, I can provide a general guideline on how to create a DFD Level 1 diagram based on the DFD Level 0 diagram we have discussed earlier. Here are the steps:
+
+1. For each of the three main processes identified in the DFD Level 0, create a new diagram for each process.
+
+2. In each new diagram, decompose the process into its sub-processes or sub-functions.
+
+3. Add data stores to represent data that is stored or retrieved in each sub-process or sub-function.
+
+4. Add external entities to represent entities that interact with each sub-process or sub-function.
+
+5. Draw arrows between the sub-processes or sub-functions to show the flow of data.
+
+6. Draw arrows between the sub-processes or sub-functions and the data stores to show data storage and retrieval.
+
+7. Draw arrows between the sub-processes or sub-functions and the external entities to show interactions.
+
+8. Label the arrows to indicate the type of data flow.
+
+9. Refine the diagram to ensure that it is clear and accurate.
+
+10. Repeat steps 2-9 for each of the sub-processes or sub-functions until you reach the required level of detail.
+
+The DFD Level 1 diagram provides a more detailed view of each main process in the DFD Level 0 diagram. It helps to identify the different sub-processes or sub-functions and their interactions, which can aid in understanding the PMCS system's processes and functionalities.
+
+
+
+
+
+Certainly, here is a detailed description of the entities, processes, and subprocesses in the PMCS system:
+
+Entities:
+1. Customer - the entity that interacts with the system to perform various activities, such as depositing, withdrawing, transferring funds, and checking balances.
+2. Administrator - the entity that manages the system, performs activities such as registering, editing, and deleting customers, maintaining site information, and writing announcements.
+3. MPESA Mobile Wallet - an external entity that interacts with the system to deposit and receive funds.
+
+Processes:
+1. Customer Management - the process responsible for managing customer-related activities such as account registration, login, depositing and withdrawing funds, transferring funds, and checking balances.
+2. Account Management - the process responsible for managing customer account-related activities such as setting up fixed deposits, emergency withdrawals, and checking account details.
+3. Transaction Management - the process responsible for managing transaction-related activities such as transaction history and fund transfer confirmation.
+
+Subprocesses:
+1. Customer Registration - a subprocess within the Customer Management process responsible for registering a new customer account.
+2. Customer Login - a subprocess within the Customer Management process responsible for allowing the customer to log in to their account.
+3. Deposit Funds - a subprocess within the Customer Management process responsible for depositing funds into the customer's account.
+4. Withdraw Funds - a subprocess within the Customer Management process responsible for allowing the customer to withdraw funds from their account.
+5. Transfer Funds - a subprocess within the Customer Management process responsible for allowing the customer to transfer funds to other accounts.
+6. Check Balance - a subprocess within the Customer Management process responsible for allowing the customer to check their account balance.
+7. Fixed Deposit Setup - a subprocess within the Account Management process responsible for allowing the customer to set up fixed deposits.
+8. Emergency Withdrawal - a subprocess within the Account Management process responsible for allowing the customer to request an emergency withdrawal from their fixed deposit.
+9. Transaction History - a subprocess within the Transaction Management process responsible for displaying the customer's transaction history.
+10. Transfer Funds Confirmation - a subprocess within the Transaction Management process responsible for confirming fund transfers between customers' accounts.
+11. Register Customer - a subprocess within the Administrator process responsible for registering a new customer.
+12. Edit Customer Information - a subprocess within the Administrator process responsible for editing customer information.
+13. Delete Customer - a subprocess within the Administrator process responsible for deleting a customer.
+14. Total Balance Check - a subprocess within the Administrator process responsible for checking the total balance of all customer accounts.
+15. Transaction History Check - a subprocess within the Administrator process responsible for checking the transaction history of all customer accounts.
+16. Transfer Funds Between Customers - a subprocess within the Administrator process responsible for transferring funds between customers' accounts.
+17. Write Announcements - a subprocess within the Administrator process responsible for writing announcements for the site.
+18. Maintain Site Information - a subprocess within the Administrator process responsible for maintaining the site information, such as updating the website content, managing user accounts, and ensuring the website is running smoothly.
+19. Deposit Funds - a subprocess within the MPESA Mobile Wallet entity responsible for depositing funds into the PMCS system.
+20. Receive Funds - a subprocess within the MPESA Mobile Wallet entity responsible for receiving funds from the PMCS system.
+
+In summary, the PMCS system has three main entities: the customer, the administrator, and the MPESA Mobile Wallet. These entities interact with the system to perform various activities, such as account registration, fund transfer, depositing, and withdrawing funds. The system comprises three main processes: Customer Management, Account Management, and Transaction Management, responsible for managing customer-related, account-related, and transaction-related activities, respectively. These processes consist of various subprocesses, each responsible for performing specific tasks, such as customer registration, depositing funds, transaction history, and maintaining site information.
