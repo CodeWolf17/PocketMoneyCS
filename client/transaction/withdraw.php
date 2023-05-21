@@ -74,7 +74,16 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
             // Validate the withdrawal amount against the current balance
             var currentBalance = parseFloat($('[name="current"]').val());
             var withdrawalAmount = parseFloat($('[name="balance"]').val());
-            if (currentBalance < withdrawalAmount) {
+
+            if (currentBalance <= 0) {
+    alert_toast("You have no funds",'warning');
+    return false;
+}
+            else if (withdrawalAmount == 0) {
+                alert_toast("You cannot withdraw nothing",'warning');
+return false;
+}
+            else if (currentBalance < withdrawalAmount) {
                 alert_toast("Amount is greater than your current balance",'warning');
 return false;
 }
@@ -95,6 +104,8 @@ $.ajax({
     },
     success: function(resp) {
         if (resp.status == 'success') {
+            currentBalance -= withdrawalAmount;
+$('[name="current"]').val(currentBalance.toFixed(2));
             location.reload();
         } else if (!!resp.msg) {
             var msg = $('<div class="err_msg"><div class="alert alert-danger">' + resp.msg + '</div></div>');

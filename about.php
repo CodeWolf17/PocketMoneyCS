@@ -16,7 +16,7 @@ a {
 .pricingTable {
     text-align: center;
     background: #fff;
-    margin: 0 -15px;
+    margin: 0 -14px;
     box-shadow: 0 0 10px #ababab;
     padding-bottom: 40px;
     border-radius: 10px;
@@ -193,7 +193,7 @@ a {
                 <h3 class="heading">Daily Week Bundle</h3>
                 <div class="pricing-content">
                     <ul>
-                        <li><b>Daily Fixed deposit for a week</b></li>
+                        <li><b>Daily Fixed deposit for one week</b></li>
                         <li>+Withdraw a fixed amount daily for a week</li>
                         <li>+Ideal for saving money over a shorter period</li>
                     </ul>
@@ -213,7 +213,7 @@ a {
                 <h3 class="heading">Daily Mo Bundle</h3>
                 <div class="pricing-content">
                     <ul>
-                        <li><b>Fixed deposit daily for a month</b></li>
+                        <li><b>Fixed deposit daily for one month</b></li>
                         <li>+Withdraw a fixed amount daily for a month</li>
                         <li>+Ideal for saving money over a longer period</li>
                     </ul>
