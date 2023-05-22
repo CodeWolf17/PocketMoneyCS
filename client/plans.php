@@ -381,16 +381,21 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
     var planAmount = parseInt($("#planamount").val());
     var planDuration = $("#planduration").val();
     var userbalance = parseInt(<?php echo $userbalanceog ?>);
+    var plandurint = parseInt(planDuration);
 
     if (planType === "Daily Week Bundle") {
       planDuration = "7 days";
       if (planAmount < 3500 || planAmount > 14000) {
         alert_toast("Please enter a valid plan amount between 3,500/= and 14,000/=", 'warning');
         return;
+      } else if (planAmount % plandurint != 0  ) {
+        alert_toast("Amount should be divisible by " + plandurint + " !", 'warning');
+        return;
       } else if (planAmount > userbalance) {
         alert_toast("Insufficient balance!", 'warning');
         return;
-      } else {
+      }
+       else {
         // Insert the plan details into the database
         var data = {
           planname: planName,
@@ -426,6 +431,9 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
       planDuration = "30 days";
       if (planAmount < 15000 || planAmount > 60000) {
         alert_toast("Please enter a valid plan amount between 15,000/= and 60,000/=", 'warning');
+        return;
+      } else if (planAmount % plandurint != 0  ) {
+        alert_toast("Amount should be divisible by " + plandurint + " !", 'warning');
         return;
       } else if (planAmount > userbalance) {
         alert_toast("Insufficient balance!", 'warning');
@@ -468,6 +476,9 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
       if (planAmount < 3500) {
         alert_toast("You can deposit from 3,500/=", 'warning');
         return;
+      } else if (planAmount % plandurint != 0  ) {
+        alert_toast("Amount should be divisible by " + plandurint + " !", 'warning');
+        return;
       } else if (planAmount > userbalance) {
         alert_toast("Insufficient balance!", 'warning');
         return;
@@ -508,6 +519,9 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
       planDuration = months + " month" + (months > 1 ? "s" : "");
       if (planAmount < 14000) {
         alert_toast("You can deposit from 14,000/=", 'warning');
+        return;
+      } else if (planAmount % plandurint != 0  ) {
+        alert_toast("Amount should be divisible by " + plandurint + " !", 'warning');
         return;
       } else if (planAmount > userbalance) {
         alert_toast("Insufficient balance!", 'warning');

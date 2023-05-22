@@ -4,7 +4,7 @@
 $user_account_number =$_settings->userdata('account_number');
 
 // fetch the user's plans from the database
-$qry = $conn->query("SELECT * FROM `plans` WHERE `planmaker` = '$user_account_number'");
+$qry = $conn->query("SELECT * FROM `plans` WHERE `planmaker` = '$user_account_number' ORDER BY `planid` DESC");
 ?>
 
 <div class="card card-outline card-primary">
@@ -20,14 +20,17 @@ $qry = $conn->query("SELECT * FROM `plans` WHERE `planmaker` = '$user_account_nu
 						<th>Plan Name</th>
 						<th>Plan Type</th>
 						<th>Plan Amount</th>
+						<th>D/W/M Amount</th>
 						<th>Amount Left</th>
 						<th>Plan Duration</th>
 						<th>Time Left</th>
 						<th>Plan Status</th>
+						<th>Plan Date</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php 
+					
 					$i = 1;
 					while($row = $qry->fetch_assoc()):
 						$plan_name = $row['planname'];
@@ -37,17 +40,22 @@ $qry = $conn->query("SELECT * FROM `plans` WHERE `planmaker` = '$user_account_nu
 						$plan_duration = $row['planduration'];
 						$plan_time = $row['plandurationleft'];
 						$plan_status = $row['planstatus'];
+						$plan_date = $row['plandate'];
+						$dwm_amount = ($plan_amount / intval($plan_time) );
 					?>
+						
 					
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td><?php echo $plan_name; ?></td>
 							<td><?php echo $plan_type; ?></td>
 							<td class='text-right'><?php echo number_format($plan_amount, 2); ?></td>
+							<td class='text-right'><?php echo number_format($dwm_amount, 2); ?></td>
 							<td class='text-right'><?php echo number_format($plan_amount_left, 2); ?></td>
 							<td><?php echo $plan_duration; ?></td>
 							<td><?php echo $plan_time; ?></td>
 							<td><?php echo $plan_status; ?></td>
+							<td><?php echo $plan_date; ?></td>
 						</tr>
 					<?php endwhile; ?>
 				</tbody>
