@@ -117,6 +117,31 @@ Class Master extends DBConnection {
 		}
 		return json_encode($resp);
 	}
+
+	function emwithdraw(){
+		extract($_POST);
+		$current = floatval(str_replace(',','',$current));
+		$new_balance = floatval($current) - floatval($balance);
+		$new_time= $ogtimeleft - $timeleft;
+
+		$update = $this->conn->query("UPDATE `plans` SET `planamountleft` = '{$new_balance}', `planewstatus` = 'no', `plandurationleft` = '{$new_time}' WHERE id = {$planid}");
+
+		$this->capture_err();
+		if($update){
+			$this->conn->query("INSERT INTO `transactions` set account_id ={$account_id},remarks='Withdraw',`type` = 1, `amount` = '{$balance}' ");
+			$this->capture_err();
+			$resp['status']='success';
+			if($this->settings->userdata('login_type') == 1){
+			$this->settings->set_flashdata('success', $name.'\'s withdraw form successfully saved.');
+			}else{
+			$this->settings->set_flashdata('success', 'Withdraw form successfully saved.');
+			$this->settings->set_userdata('balance', $new_balance);
+			}
+		}else{
+			$resp['status'] = 'failed';
+		}
+		return json_encode($resp);
+	}
 	
 	function transfer(){
 		extract($_POST);
@@ -207,6 +232,9 @@ switch ($action) {
 	break;
 	case 'withdraw':
 		echo $Master->withdraw();
+	break;
+	case 'emwithdraw':
+		echo $Master->emwithdraw();
 	break;
 	case 'transfer':
 		echo $Master->transfer();

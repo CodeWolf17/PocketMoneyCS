@@ -59,7 +59,26 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                     <label class="control-label">Confirm PIN</label>
                         <input type="number" class="form-control col-sm-6" name="confirmed_pin" id="confirmed_pin" maxlength="4" value="<?php echo isset($confirmed_pin)? $confirmed_pin : '' ?>" required> 
                     </div>
-                  
+                    
+                    <div class="form-group">
+  <label class="control-label">Security Question</label>
+  <select class="form-control col-sm-6" name="secqstn" required>
+    <option value="">Select a Security Question</option>
+    <option value="What was the name of your favorite childhood toy?">What was the name of your favorite childhood toy?</option>
+    <option value="What was the first concert you attended?">What was the first concert you attended?</option>
+    <option value="What is your favorite holiday destination?">What is your favorite holiday destination?</option>
+    <option value="What is your favorite movie?">What is your favorite movie?</option>
+    <option value="What is the name of your childhood hero?">What is the name of your childhood hero?</option>
+    <option value="What is your favorite book?">What is your favorite book?</option>
+    <option value="What is the name of your favorite teacher?">What is the name of your favorite teacher?</option>
+  </select>
+</div>
+
+
+                <div class="form-group">
+                    <label class="control-label">Answer</label>
+                    <input type="text" class="form-control col-sm-6" name="secans" value="<?php echo isset($secans)? $secans : '' ?>" required>
+                </div>
                     <div class="form-group">
                     <label class="control-label">Beginning Balance</label>
                     <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="balance" value="0" required>

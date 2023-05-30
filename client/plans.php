@@ -415,6 +415,7 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
               var newBalance = userbalance - planAmount;
               // Perform any additional actions or display a success message
               alert_toast("Plan successfully set.");
+              window.location.href="./?page=transaction/fixedplan";
             } else {
               // Handle any error response
               alert_toast("Error: " + response, 'warning');
@@ -458,6 +459,8 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
               var newBalance = userbalance - planAmount;
               // Perform any additional actions or display a success message
               alert_toast("Plan successfully set.");
+              window.location.href="./?page=transaction/fixedplan";
+             // reload
             } else {
               // Handle any error response
               alert_toast("Error: " + response, 'warning');
@@ -476,8 +479,8 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
       if (planAmount < 3500) {
         alert_toast("You can deposit from 3,500/=", 'warning');
         return;
-      } else if (planAmount % plandurint != 0  ) {
-        alert_toast("Amount should be divisible by " + plandurint + " !", 'warning');
+      } else if (planAmount % weeks != 0  ) {
+        alert_toast("Amount should be divisible by " + weeks + " !", 'warning');
         return;
       } else if (planAmount > userbalance) {
         alert_toast("Insufficient balance!", 'warning');
@@ -502,6 +505,7 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
               var newBalance = userbalance - planAmount;
               // Perform any additional actions or display a success message
               alert_toast("Plan successfully set.");
+              window.location.href="./?page=transaction/fixedplan";
             } else {
               // Handle any error response
               alert_toast("Error: " + response, 'warning');
@@ -520,8 +524,8 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
       if (planAmount < 14000) {
         alert_toast("You can deposit from 14,000/=", 'warning');
         return;
-      } else if (planAmount % plandurint != 0  ) {
-        alert_toast("Amount should be divisible by " + plandurint + " !", 'warning');
+      } else if (planAmount % months != 0  ) {
+        alert_toast("Amount should be divisible by " + months + " !", 'warning');
         return;
       } else if (planAmount > userbalance) {
         alert_toast("Insufficient balance!", 'warning');
@@ -546,6 +550,7 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
               var newBalance = userbalance - planAmount;
               // Perform any additional actions or display a success message
               alert_toast("Plan successfully set.");
+              window.location.href="./?page=transaction/fixedplan";
             } else {
               // Handle any error response
               alert_toast("Error: " + response, 'warning');
@@ -561,7 +566,7 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
 
     var planAmountLeft = planAmount;
     var planDurationLeft = planDuration;
-    var planStatus = "active";
+    var planStatus = "Active";
 
     if (planAmount < 0 || isNaN(planAmount)) {
       alert_toast("Please enter a valid plan amount.", 'warning');
@@ -578,6 +583,8 @@ $userbalanceog = str_replace(",","",$userbalanceogc);
     console.log("Plan Status: " + planStatus);
 
     // Update the necessary fields in the plans table
+   window.location.href="./?page=transaction/fixedplan";
+   //location.reload();
   });
 });
 

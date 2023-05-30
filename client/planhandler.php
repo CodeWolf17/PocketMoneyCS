@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Perform any additional form data validation
 
     // Insert the plan details into the database
-    $sql = "INSERT INTO plans (planname, plantype, planmaker, planamount, planamountleft, planduration, plandurationleft, planstatus) VALUES ('$planName', '$planType', '$planMaker', '$planAmount', '$planAmount', '$planDuration', '$planDuration', 'active')";
+    $sql = "INSERT INTO plans (planname, plantype, planmaker, planamount, planamountleft, planduration, plandurationleft, planstatus) VALUES ('$planName', '$planType', '$planMaker', '$planAmount', '$planAmount', '$planDuration', '$planDuration', 'Active')";
 
     if ($conn->query($sql) === TRUE) {
         // Update the user's balance by deducting the plan amount
@@ -39,4 +39,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(array('status' => 'error', 'message' => 'Failed to insert plan: ' . $conn->error));
     }
 }
+ 
 ?>

@@ -40,6 +40,7 @@ class Login extends DBConnection {
 	function clogin(){
 		extract($_POST);
 		$qry = $this->conn->query("SELECT * from `accounts` where account_number = '$account_number' and (`pin` = md5('$pin') or confirmed_pin = '{$pin}') ");
+
 		if($qry->num_rows > 0){
 			foreach($qry->fetch_array() as $k => $v){
 				$this->settings->set_userdata($k,$v);

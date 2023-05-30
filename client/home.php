@@ -54,8 +54,12 @@ $totalBalance = $availableBalance + $fixedBalance;
   
   <div class="row mt-3">
     <div class="col-6 text-start">
-      <button class="btn btn-lg btn-danger">Emergency Withdrawal</button>
+        <a href="./?page=transaction/fixedplan">
+            <button class="btn btn-lg btn-danger">Emergency Withdrawal (EW)</button>
+        </a>
     </div>
+</div>
+
 
     <!--  <div class="col-6 text-end">
       <button class="btn btn-lg btn-success">Request Withdrawal</button>
